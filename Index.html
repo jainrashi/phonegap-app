@@ -22,36 +22,22 @@
         <!--<h1>{{ title }}</h1>
         <h2>{{ promo }}</h2>-->
 
-        <div ng-repeat="product in products"  class="col-md-6">
+        <div    class="col-md-6">
             <div class="thumbnail">
                 <img ng-src="{{ product.cover }}">
                 <p class="title">{{ product.name }}</p>
                 <p class="content">{{ product.content }}</p>
-                <div class= "rating">
+                <!--<div class= "rating">
                     <p class="likes">+ {{ product.likes }} </p>
-                </div>
+                </div>-->
             </div>
+            <input type="button" ng-click="previous()" value="Previous" />
+            <input type="button" ng-click="next()" value="Next" />
         </div>
 
     </div>
 </div>
 
-<script>
-    $(function() {
-        //Enable swiping...
-        $(".thumbnail").swipe( {
-            //Generic swipe handler for all directions
-            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                $(this).text("You swiped " + direction );
-                if(direction === up){
-
-                }
-            },
-            //Default is 75px, set to 0 for demo so any distance triggers swipe
-            threshold:0
-        });
-    });
-</script>
 
 <!-- Modules -->
 <script src="js/cordova.js"></script>
