@@ -1,6 +1,7 @@
+/**
+ * Created by Ghoshsa on 5/30/2016.
+ */
 app.controller('MainController', ['$scope', function($scope) {
-    $scope.title = 'This Month\'s Bestsellers';
-    $scope.promo = 'The most popular books this month.';
     $scope.products = [
         {
             name: 'First News Heading',
@@ -30,4 +31,41 @@ app.controller('MainController', ['$scope', function($scope) {
     $scope.plusOne = function(index) {
         $scope.products[index].likes += 1;
     };
+
+    $scope.currentPosition=0;
+    $scope.product=$scope.products[0]; //initialize the product var with first element
+    $scope.next=function(){
+        $scope.currentPosition++;
+        if($scope.currentPosition <$scope.products.length)
+            $scope.product=$scope.products[$scope.currentPosition];
+        else
+            $scope.curentPosition=$scope.products.length-1;
+    };
+    $scope.previous=function(){
+        $scope.currentPosition--;
+        if($scope.currentPosition >=0)
+            $scope.product=$scope.products[$scope.currentPosition];
+        else
+            $scope.curentPosition=0;
+    };
+    $scope.upward = function() {
+        //Enable swiping... 
+        $scope.currentPosition++;
+        $(".thumbnail").swipe( {
+            //Generic swipe handler for all directions
+            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+                if(distance == up){
+                    if($scope.currentPosition <$scope.products.length)
+                        $scope.product=$scope.products[$scope.currentPosition];
+                    else
+                        $scope.curentPosition=$scope.products.length-1;
+                }
+                
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold:0
+        });
+    };
+    
+
 }]);
